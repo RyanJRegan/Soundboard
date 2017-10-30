@@ -11,12 +11,12 @@
           <div class="card h-100">
             <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
             <div class="card-body">
-              <form method="post">
+              <form method="post" action="/login/">
                 <h4 class="card-title">
                   <a href="#">Log In!</a>
                 </h4>
                 {% csrf_token %}
-                 {{ form.as_p }}
+                 {{ authentication_form.as_p }}
                 <button type="submit">Login</button>
               </form>
             </div>

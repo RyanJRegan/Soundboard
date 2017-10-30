@@ -16,11 +16,12 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from soundboard import views
-from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.index, name='index'),
-    url(r'^login/$', auth_views.login, {'template_name': 'soundboard/login.html'}, name='login'),
+    url(r'^login/$', views.login_user, name='login_user'),
+    url(r'^signup/$', views.signup, name='signup'),
+    url(r'^login_or_signup/$', views.login_or_signup, name='login_or_signup'),
     url(r'^your_boards/$', views.your_boards, name='your_boards'),
     ]

@@ -103,7 +103,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LOGIN_URL = 'login'
+LOGIN_URL = 'login_or_signup'
 
 LOGIN_REDIRECT_URL = 'your_boards'
 
