@@ -16,7 +16,7 @@
                   <a href="#">Log In!</a>
                 </h4>
                 {% csrf_token %}
-                 {{ authentication_form.as_p }}
+                {{ authentication_form.as_p }}
                 <button type="submit">Login</button>
               </form>
             </div>
@@ -26,11 +26,14 @@
           <div class="card h-100">
             <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
             <div class="card-body">
-              <form>
+              <form method="post" action="/signup/">
                 <h4 class="card-title">
                   <a href="#">Sign Up!</a>
                 </h4>
                 <p class="card-text">To sign up, please provide an email, desired username, and password.</p>
+                {% csrf_token %}
+                {{ user_creation_form.as_p }}
+                <button type="submit">Sign up</button>
               </form>
             </div>
           </div>
