@@ -7,8 +7,8 @@ class Sound(models.Model):
     text = models.CharField(max_length=280, null=True)
     sound_file = models.FileField(upload_to='sounds/')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    image_file = models.FileField(upload_to='sound_images/')
+    image_file = models.FileField(upload_to='sound_images/', null=True)
 
-class SoundBoard(models.Model):
-    title = models.CharField(max_length=140)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+# class SoundBoard(models.Model):
+#     title = models.CharField(max_length=140)
+#     user = models.ForeignKey(User, on_delete=models.CASCADE)
