@@ -19,7 +19,7 @@ def index(request):
 @csrf_protect
 def login_user(request):
     if request.method != 'POST':
-        return #TODO error message city
+        return redirect('/login_or_signup/')
     authentication_form = AuthenticationForm(data=request.POST)
     if not authentication_form.is_valid():
         return login_or_signup(request, authentication_form=authentication_form)
@@ -36,7 +36,7 @@ def your_boards(request):
 @csrf_protect
 def signup(request):
     if request.method != 'POST':
-        return #TODO error message city
+        return redirect('/login_or_signup/')
     user_creation_form = SignUpForm(data=request.POST)
     if not user_creation_form.is_valid():
         return login_or_signup(request, user_creation_form=user_creation_form)

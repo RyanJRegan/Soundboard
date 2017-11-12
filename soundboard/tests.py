@@ -37,3 +37,17 @@ class AuthenticationTestCase(TestCase):
         })
 
         self.assertEqual(response.url, '/your_boards/')
+
+    def test_get_call_to_login_redirects_to_login_or_signup(self):
+        client = Client()
+
+        response = client.get('/login/')
+
+        self.assertEqual(response.url, '/login_or_signup/')
+
+    def test_get_call_to_signup_redirects_to_login_or_signup(self):
+        client = Client()
+
+        response = client.get('/signup/')
+
+        self.assertEqual(response.url, '/login_or_signup/')
