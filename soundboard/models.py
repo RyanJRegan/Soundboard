@@ -10,5 +10,5 @@ class Sound(models.Model):
     image_file = models.FileField(upload_to='sound_images/', null=True)
 
 # class SoundBoard(models.Model):
-#     title = models.CharField(max_length=140)
+#     name = models.CharField(max_length=140)
 #     user = models.ForeignKey(User, on_delete=models.CASCADE)

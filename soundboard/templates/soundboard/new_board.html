@@ -1,0 +1,50 @@
+{% extends 'soundboard/base.html' %}
+{% block content %}
+<script src="https://unpkg.com/vue"></script>
+<script src="//unpkg.com/babel-polyfill@latest/dist/polyfill.min.js"></script>
+<script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
+{% verbatim %}
+<div id="app">
+	<div class="form-group">
+		<label for="nameInput">Name</label>
+		<input v-model="name" type="text" class="form-control" id="nameInput" placeholder="soundboard name goes riiiight here">
+	</div>
+	<div>
+		<b-btn v-b-modal.uploader>Show Modal</b-btn>
+	</div>
+  <b-modal id="uploader" title="Upload New Sound">
+    <b-form @submit="onNewSoundFormSubmit">
+      <b-form-group id="soundNameGroup"
+                    label="Sound Name:" label-for="soundNameInput">
+        <b-form-input id="soundNameInput"
+                      type="text" v-model="newSoundForm.name" required placeholder="My Sound">
+        </b-form-input>
+      </b-form-group>
+      <b-form-group id="soundTextInputGroup"
+                    label="Sound Input:" label-for="soundTextInput">
+        <b-form-input id="soundTextInput"
+                      type="text" v-model="newSoundForm.text" required placeholder="My Sound's Text">
+        </b-form-input>
+      </b-form-group>
+      <b-form-group id="soundImageInputGroup"
+                    label="Sound Image:" label-for="soundImageInput">
+        <b-form-file id="soundImageInput"
+                     v-model="newSoundForm.imageFile"
+                     accept="image/*">
+        </b-form-input>
+      </b-form-group>
+      <b-form-group id="soundSoundInputGroup"
+                    label="Sound Sound:" label-for="soundSoundInput">
+        <b-form-file id="soundSoundInput"
+                     v-model="newSoundForm.soundFile" required
+                     accept="audio/*">
+        </b-form-input>
+      </b-form-group>
+      <b-button type="submit" variant="primary">Submit</b-button>
+    </b-form>
+  </b-modal>
+</div>
+{% endverbatim %}
+<p>New Board!</p>
+<script src="/static/soundboard/js/new_board.js"></script>
+{% endblock %}

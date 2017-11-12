@@ -54,3 +54,7 @@ def login_or_signup(request, authentication_form=None, user_creation_form=None):
 @login_required
 def your_boards(request):
     return render(request, "soundboard/your_boards.html")
+
+@login_required
+def new_board(request):
+    return render(request, "soundboard/new_board.html")
