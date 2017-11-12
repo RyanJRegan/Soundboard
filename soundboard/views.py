@@ -29,10 +29,6 @@ def login_user(request):
     login(request, user)
     return redirect('your_boards')
 
-@login_required
-def your_boards(request):
-    return render(request, "soundboard/your_boards.html")
-
 @csrf_protect
 def signup(request):
     if request.method != 'POST':
@@ -54,3 +50,7 @@ def login_or_signup(request, authentication_form=None, user_creation_form=None):
         user_creation_form = SignUpForm()
     return render(request, "soundboard/login_or_signup.html", {'authentication_form': authentication_form,
         'user_creation_form': user_creation_form})
+
+@login_required
+def your_boards(request):
+    return render(request, "soundboard/your_boards.html")
