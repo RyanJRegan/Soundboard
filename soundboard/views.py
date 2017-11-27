@@ -5,6 +5,9 @@ from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
 from django import forms
+from django.http import JsonResponse
+from soundboard.models import Sound
+
 
 class SignUpForm(UserCreationForm):
     email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')
@@ -58,3 +61,18 @@ def your_boards(request):
 @login_required
 def new_board(request):
     return render(request, "soundboard/new_board.html")
+
+def create_sound(request):
+    new_sound = Sound.objects.create(name=request.POST.get('name'),
+            text=request.POST.get('text'),
+            image_file=request.FILES.get('image_file'),
+            sound_file=request.FILES.get('sound_file'),
+            user=request.user)
+
+    return JsonResponse({
+        'id': new_sound.id,
+        'name': new_sound.name,
+        'text': new_sound.text,
+        'image_file': '/media/' + new_sound.image_file.url,
+        'sound_file': '/media/' + new_sound.sound_file.url,
+    })

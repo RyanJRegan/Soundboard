@@ -16,6 +16,9 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from soundboard import views
+from django.conf import settings
+from django.conf.urls.static import static
+from django.views.static import serve
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -25,4 +28,12 @@ urlpatterns = [
     url(r'^login_or_signup/$', views.login_or_signup, name='login_or_signup'),
     url(r'^your_boards/$', views.your_boards, name='your_boards'),
     url(r'^boards/new/$', views.new_board, name='new_board'),
+    url(r'^sounds/create/$', views.create_sound, name='create_sound'),
+]
+
+if settings.DEBUG:
+    urlpatterns += [
+        url(r'^media/(?P<path>.*)$', serve, {
+            'document_root': settings.MEDIA_ROOT,
+        }),
     ]

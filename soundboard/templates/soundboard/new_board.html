@@ -9,6 +9,20 @@
 		<label for="nameInput">Name</label>
 		<input v-model="name" type="text" class="form-control" id="nameInput" placeholder="soundboard name goes riiiight here">
 	</div>
+
+  <div>
+    <ul v-for="sound in sounds">
+      <li>{{ sound.name }}</li>
+      <li>{{ sound.text }}</li>
+      <li>{{ sound.image_file }}</li>
+      <li>{{ sound.sound_file }}</li>
+    <img v-bind:src="sound.image_file">
+    <audio controls>
+      <source v-bind:src="sound.sound_file" type="audio/wav">
+    </audio>
+    </ul>
+  </div>
+
 	<div>
 		<b-btn v-b-modal.uploader>Show Modal</b-btn>
 	</div>
@@ -40,11 +54,12 @@
                      accept="audio/*">
         </b-form-input>
       </b-form-group>
-      <b-button type="submit" variant="primary">Submit</b-button>
+      <b-button type="submit" variant="primary" :disabled="newSoundForm.isUploading">Submit</b-button>
     </b-form>
   </b-modal>
 </div>
 {% endverbatim %}
 <p>New Board!</p>
+{% csrf_token %}
 <script src="/static/soundboard/js/new_board.js"></script>
 {% endblock %}
