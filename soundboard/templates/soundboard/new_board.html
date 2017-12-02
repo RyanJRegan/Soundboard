@@ -13,13 +13,16 @@
 		<input v-model="name" type="text" class="form-control" id="nameInput" placeholder="soundboard name goes riiiight here">
 	</div>
   <div class="row text-center">
-    <div class="col-lg-2 col-md-2 mb-4" v-for="sound in sounds">
+    <div class="col-lg-2 col-md-2 mb-4" v-for="(sound, index) in sounds">
       <div class="card">
         <a class="thumbnail" v-on:click="picClick(sound)">
           <img class="card-img-top" v-bind:src="sound.image_file">
           <p class="card-text">{{ sound.text }}</p>
         </a>
         <div class="card-footer text-muted">
+          <b-btn v-if="index !== 0" v-on:click="moveSound(index, -1)">&laquo;</b-btn>
+          <b-btn v-on:click="removeSound(index)">&times;</b-btn>
+          <b-btn v-if="index !== (sounds.length - 1)" v-on:click="moveSound(index, 1)">&raquo;</b-btn>
         </div>
       </div>
     </div>

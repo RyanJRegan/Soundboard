@@ -54,6 +54,15 @@ var app = new Vue({
     },
     addExistingSound: function (sound) {
       this.sounds.push(sound)
+    },
+    removeSound: function (soundIndex) {
+      this.sounds.splice(soundIndex, 1)
+    },
+    moveSound: function (index, position) {
+      var currentSound = this.sounds[index]
+      var  targetSound = this.sounds[index + position]
+      Vue.set(this.sounds, index + position, currentSound)
+      Vue.set(this.sounds, index, targetSound)
     }
   }
 })
