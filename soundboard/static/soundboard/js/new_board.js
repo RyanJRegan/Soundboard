@@ -1,4 +1,13 @@
 var soundLibrary = JSON.parse(document.getElementById('existing-sounds').innerHTML)
+function emptySoundForm() {
+  return {
+      name: '',
+      text: '',
+      imageFile: null,
+      soundFile: null,
+      isUploading: false
+  }
+}
 
 var app = new Vue({
   el: '#app',
@@ -6,13 +15,7 @@ var app = new Vue({
     name: '',
     sounds: [],
     soundLibrary: soundLibrary,
-    newSoundForm: {
-      name: '',
-      text: '',
-      imageFile: null,
-      soundFile: null,
-      isUploading: false
-    },
+    newSoundForm: emptySoundForm()
   },
   methods: {
     onNewSoundFormSubmit: function (event) {
@@ -34,6 +37,10 @@ var app = new Vue({
         if (xhr.status === 200) {
           this.sounds.push(JSON.parse(xhr.response))
           this.soundLibrary.push(JSON.parse(xhr.response))
+          this.newSoundForm=emptySoundForm()
+          event.target.reset()
+          this.$refs.soundImageInput.reset()
+          this.$refs.soundSoundInput.reset()
         } else {
           console.log('An error occurred!');
           this.newSoundForm.isUploading = false

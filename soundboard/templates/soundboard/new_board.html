@@ -46,14 +46,16 @@
                     label="Sound Image:" label-for="soundImageInput">
         <b-form-file id="soundImageInput"
                      v-model="newSoundForm.imageFile"
-                     accept="image/*">
+                     accept="image/*"
+                     ref="soundImageInput">
         </b-form-input>
       </b-form-group>
       <b-form-group id="soundSoundInputGroup"
                     label="Sound Sound:" label-for="soundSoundInput">
         <b-form-file id="soundSoundInput"
                      v-model="newSoundForm.soundFile" required
-                     accept="audio/*">
+                     accept="audio/*"
+                     ref="soundSoundInput">
         </b-form-input>
       </b-form-group>
       <b-button type="submit" variant="primary" :disabled="newSoundForm.isUploading">Submit</b-button>
