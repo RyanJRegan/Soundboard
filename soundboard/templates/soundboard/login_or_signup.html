@@ -1,19 +1,15 @@
 {% extends 'soundboard/base.html' %}
       {% block content %}
-      <!-- Jumbotron Header -->
-      <header class="jumbotron my-4">
-        <p style="width:50%;margin: 0 auto;">Create Your Login Or Sign Up!</p>
-      </header>
-
       <!-- Page Features -->
+      <br>
       <div class="row">
         <div class="col-lg-6 portfolio-item">
           <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+            <a href="#"><img class="card-img-top" src="https://i.imgur.com/Fvds7fT.png" alt=""></a>
             <div class="card-body">
               <form method="post" action="/login/">
                 <h4 class="card-title">
-                  <a href="#">Log In!</a>
+                 <!-- <a href="#">Log In!</a> -->
                 </h4>
                 {% csrf_token %}
                 {{ authentication_form.as_p }}
@@ -24,11 +20,11 @@
         </div>
         <div class="col-lg-6 portfolio-item">
           <div class="card h-100">
-            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+            <a href="#"><img class="card-img-top" src="https://i.imgur.com/j0OxAr5.png" alt=""></a>
             <div class="card-body">
               <form method="post" action="/signup/">
                 <h4 class="card-title">
-                  <a href="#">Sign Up!</a>
+                 <!-- <a href="#">Sign Up!</a> -->
                 </h4>
                 <p class="card-text">To sign up, please provide an email, desired username, and password.</p>
                 {% csrf_token %}
@@ -39,5 +35,6 @@
           </div>
         </div>
       </div>
+      <br>
       <!-- /.row -->
       {% endblock %}

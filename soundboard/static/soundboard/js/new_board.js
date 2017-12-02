@@ -1,8 +1,11 @@
+var soundLibrary = JSON.parse(document.getElementById('existing-sounds').innerHTML)
+
 var app = new Vue({
   el: '#app',
   data: {
     name: '',
     sounds: [],
+    soundLibrary: soundLibrary,
     newSoundForm: {
       name: '',
       text: '',
@@ -30,12 +33,20 @@ var app = new Vue({
       xhr.onload = () => {
         if (xhr.status === 200) {
           this.sounds.push(JSON.parse(xhr.response))
+          this.soundLibrary.push(JSON.parse(xhr.response))
         } else {
           console.log('An error occurred!');
           this.newSoundForm.isUploading = false
         }
       }
       xhr.send(formData)
+    },
+    picClick: function (sound) {
+      var audio = new Audio(sound.sound_file)
+      audio.play()
+    },
+    addExistingSound: function (sound) {
+      this.sounds.push(sound)
     }
   }
 })

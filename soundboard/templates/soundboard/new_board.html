@@ -3,29 +3,31 @@
 <script src="https://unpkg.com/vue"></script>
 <script src="//unpkg.com/babel-polyfill@latest/dist/polyfill.min.js"></script>
 <script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
+
+<script type="application/json" id="existing-sounds">{{existing_sounds|safe}}</script>
+
 {% verbatim %}
 <div id="app">
 	<div class="form-group">
 		<label for="nameInput">Name</label>
 		<input v-model="name" type="text" class="form-control" id="nameInput" placeholder="soundboard name goes riiiight here">
 	</div>
-
-  <div>
-    <ul v-for="sound in sounds">
-      <li>{{ sound.name }}</li>
-      <li>{{ sound.text }}</li>
-      <li>{{ sound.image_file }}</li>
-      <li>{{ sound.sound_file }}</li>
-    <img v-bind:src="sound.image_file">
-    <audio controls>
-      <source v-bind:src="sound.sound_file" type="audio/wav">
-    </audio>
-    </ul>
+  <div class="row text-center">
+    <div class="col-lg-2 col-md-2 mb-4" v-for="sound in sounds">
+      <div class="card">
+        <a class="thumbnail" v-on:click="picClick(sound)">
+          <img class="card-img-top" v-bind:src="sound.image_file">
+          <p class="card-text">{{ sound.text }}</p>
+        </a>
+        <div class="card-footer text-muted">
+        </div>
+      </div>
+    </div>
   </div>
-
 	<div>
-		<b-btn v-b-modal.uploader>Show Modal</b-btn>
+		<b-btn v-b-modal.uploader>Add Sound</b-btn>
 	</div>
+
   <b-modal id="uploader" title="Upload New Sound">
     <b-form @submit="onNewSoundFormSubmit">
       <b-form-group id="soundNameGroup"
@@ -56,6 +58,21 @@
       </b-form-group>
       <b-button type="submit" variant="primary" :disabled="newSoundForm.isUploading">Submit</b-button>
     </b-form>
+    <hr>
+    <h2>Add Existing Sound</h2>
+    <div class="row text-center">
+      <div class="col-lg-3 col-md-3 mb-4" v-for="sound in soundLibrary">
+        <div class="card">
+          <a class="thumbnail" v-on:click="picClick(sound)">
+            <img class="card-img-top" v-bind:src="sound.image_file">
+            <p class="card-text">{{ sound.text }}</p>
+          </a>
+          <div class="card-footer text-muted">
+            <b-btn v-on:click="addExistingSound(sound)">+</b-btn>
+          </div>
+        </div>
+      </div>
+    </div>
   </b-modal>
 </div>
 {% endverbatim %}
