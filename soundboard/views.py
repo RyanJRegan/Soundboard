@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.views.decorators.csrf import csrf_protect
@@ -6,7 +6,7 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
 from django import forms
 from django.http import JsonResponse
-from soundboard.models import Sound
+from soundboard.models import Sound, Soundboard, SoundboardAssociation
 import json
 from django.http import HttpResponse
 
@@ -76,3 +76,32 @@ def create_sound(request):
             user=request.user)
 
     return JsonResponse(new_sound.as_dict())
+
+def create_soundboard(request):
+    sounds_to_be_added = request.POST.get('sounds').split(',')
+    soundboard_name = request.POST.get('soundboardName')
+
+    soundboard = Soundboard.objects.create(name=soundboard_name,
+                                           user=request.user)
+    # import pdb; pdb.set_trace()
+    for i, sound_id in enumerate(sounds_to_be_added):
+        # pdb.set_trace()
+        sound = get_object_or_404(Sound, id=sound_id) # may have to convert sound_id to int
+        soundboard_association = SoundboardAssociation.objects.create(
+                sound=sound,
+                soundboard=soundboard,
+                order=i)
+        soundboard_association.save()
+
+    return JsonResponse({ 'id': soundboard.id })
+
+    # import pdb; pdb.set_trace(),
+    # soundboard = SoundboardAssociation(sounds=sounds_to_be_added, 
+    # return render(request, "soundboard/your_boards.html")
+
+def show_soundboard(request, id=None):
+    soundboard = get_object_or_404(Soundboard, id=int(id))
+
+    return render(request, "soundboard/show_soundboard.html", {
+        'soundboard': json.dumps(soundboard)
+    })

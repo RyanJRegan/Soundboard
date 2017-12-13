@@ -28,7 +28,9 @@ urlpatterns = [
     url(r'^login_or_signup/$', views.login_or_signup, name='login_or_signup'),
     url(r'^your_boards/$', views.your_boards, name='your_boards'),
     url(r'^boards/new/$', views.new_board, name='new_board'),
-    url(r'^sounds/create/$', views.create_sound, name='create_sound'),
+    url(r'^sounds/create/$', views.create_sound, name='crdeate_sound'),
+    url(r'^soundboard/create/$', views.create_soundboard, name='create_soundboard'),
+    url(r'^soundboard/(?P<id>[0-9]+)/$', views.create_soundboard, name='create_soundboard'),
 ]
 
 if settings.DEBUG:

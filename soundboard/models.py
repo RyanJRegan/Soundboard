@@ -41,7 +41,7 @@ class Soundboard(models.Model):
 class SoundboardAssociation(models.Model):
     sound = models.ForeignKey(Sound, on_delete=models.CASCADE)
     soundboard = models.ForeignKey(Soundboard, on_delete=models.CASCADE)
-    order = models.IntegerField(),
+    order = models.IntegerField()
 
     def __str__(self):
         return self.name

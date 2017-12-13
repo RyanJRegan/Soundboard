@@ -9,8 +9,8 @@
 {% verbatim %}
 <div id="app">
 	<div class="form-group">
-		<label for="nameInput">Name</label>
-		<input v-model="name" type="text" class="form-control" id="nameInput" placeholder="soundboard name goes riiiight here">
+		<label for="nameInput">Soundboard Name</label>
+		<input v-model="soundboardName" type="text" class="form-control" placeholder="soundboard name">
 	</div>
   <div class="row text-center">
     <div class="col-lg-2 col-md-2 mb-4" v-for="(sound, index) in sounds">
@@ -79,6 +79,7 @@
       </div>
     </div>
   </b-modal>
+<button type="button" class="btn btn-primary" v-on:click="createSoundboard">Save Board</button>
 </div>
 {% endverbatim %}
 <p>New Board!</p>
